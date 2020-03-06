@@ -31,8 +31,8 @@
             }
         },
         update() {
-            _app.data('time', _app.data('accumulated_time') + (Date.now() - _app.data('start')));
-            _app.data('show_text', formatTime(_app.data('time')));
+            _app.data('time',(Date.now() - _app.data('start')));
+            _app.data('show_text', formatTime(_app.data('accumulated_time') + _app.data('time')));
         },
         stop() {
             if(_app.data('interval')) clearInterval(_app.data('interval'));
