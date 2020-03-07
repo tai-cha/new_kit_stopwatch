@@ -11,6 +11,8 @@
         return `${zeroPad(hours, 2)}:${zeroPad(minutes, 2)}:${zeroPad(seconds, 2)}.${zeroPad(millsec, 3)}`
     }
 
+    const currentTime = () => _app.data('accumulated_time') + _app.data('time');
+
     const events = {
         init() {
             _app.data('time', 0);
@@ -31,12 +33,16 @@
             }
         },
         update() {
-            _app.data('time',(Date.now() - _app.data('start')));
-            _app.data('show_text', formatTime(_app.data('accumulated_time') + _app.data('time')));
+            _app.data('time', Date.now() - _app.data('start'));
+            _app.data('show_text', formatTime(currentTime()));
+        },
+        lap() {
+            _app.dom('ol.laps').prepend(`<li>${formatTime(currentTime())}</li>`);
+            return 
         },
         stop() {
             if(_app.data('interval')) clearInterval(_app.data('interval'));
-            _app.data('accumulated_time', _app.data('accumulated_time') + _app.data('time'));
+            _app.data('accumulated_time', currentTime());
             _app.data('interval', null);
             _app.dom('.start').show();
             _app.dom('.stop').hide();
