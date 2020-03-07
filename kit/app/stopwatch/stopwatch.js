@@ -2,17 +2,6 @@
 
     const isDisabled = selector => (_app.dom(selector).filter('.-disabled').length > 0);
 
-    const toggleDisabled = selector => {
-        const elems = _app.dom(selector);
-        Array.prototype.forEach.call(dom, (el)=>{
-            if (el.filter(':not(-disabled)').length > 0){
-                el.removeClass('-disabled');
-            } else {
-                el.addClass('-disabled');
-            }
-        });
-    }
-
     const zeroPad = (obj, len) => String(obj).padStart(len, '0');
 
     const formatTime = timediff => {
@@ -59,7 +48,7 @@
         },
         lap() {
             if(!isDisabled('.lap')){
-                _app.dom('ol.laps').prepend(`<li>${formatTime(lapTime())}</li>`);
+                _app.dom('ol.laps').prepend(`<li class="m-t-s">${formatTime(lapTime())}</li>`);
                 _app.data('last_lap_time', currentTime());
                 return currentTime();
             }else return false;

@@ -3,6 +3,6 @@
 }
 
 .winc-stopwatch .laps {
-  max-height: 5.5em;
+  max-height: 7em;
   overflow-y: scroll;
 }
